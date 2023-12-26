@@ -31,8 +31,18 @@ Martin Kleppman's distributed systems lecture.
 ## Packet explained
 
 - Packet: a chunk of data sent over the network.
+- A message consists of one or more packets.
 
 ## Client Server Web Example
 
 - Client sends a request to the server.
 - Server sends a response to the client.
+
+# Remote Procedure Calls
+
+- Remote Procedure Call (RPC): a client calls a function on a remote server.
+- RPC is a way to make a network call look like a local call.
+- The implementation of RPC function is on another node.
+- **Marshalling:** converting data structures or objects in one programming language into another. This is done by the RPC library. The RPC library on the client converts the parameters into a byte sequence, and the RPC library on the server converts the byte sequence back into parameters.
+
+# The two generals problem
