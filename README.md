@@ -81,3 +81,51 @@ This is a problem in distributed systems. The generals are nodes in a distribute
   - Timing behaviour (e.g. message delay)
 
 ## Network behaviour
+
+- Assume bidirectional point to point communication between nodes
+
+We can assume reliable links, fair loss links and arbitrary loss links.
+
+Reliable links -> strong assumption.
+
+Fair loss links -> messages are not corrupted, but may be lost.
+
+Arbitrary loss links -> messages may be corrupted or lost. Malicious behaviour.
+
+Network Partition: a set of nodes is partitioned from the rest of the network. This means that the nodes in the partition can not communicate with the nodes outside the partition. A partition in human language is a network split.
+
+## Node behaviour
+
+Each node executes a specific algorithm, assume one of following:
+
+- Crash-stop: node may crash and may recover, but does not send or receive messages after recovery.
+- Crash-recovery: node may crash and may recover, and may send or receive messages after recovery.
+- Byzantine: node may behave arbitrarily, including sending conflicting messages to different nodes.
+
+A node that is not faulty is called correct.
+
+## Synchrony (timing) assumptions
+
+Assume one of the following:
+
+- Synchronous: Messages are delivered within a known bounded time. This means that we know how long it takes for a message to be delivered.
+- Partially synchronous: Messages are delivered within an unknown but bounded time. This means that we do not know how long it takes for a message to be delivered, but we know that it will be delivered within a certain time.
+- Asynchronous: Messages are delivered after an unknown time, and there is no bound on how long it may take. This means that we do not know how long it takes for a message to be delivered, and we do not know if it will be delivered at all.
+
+Note: sync and async are not the same as synchronous and asynchronous programming.
+
+### Violations of synchrony
+
+Networks usually have quite predictable latency, which can occasionally increase:
+
+- Message loss requiring retry
+- Congestion/Contention causing queuing, this means that messages are waiting in a queue to be sent.
+- Network/route reconfiguration
+
+Nodes usually execute at a predictable speed, which occasionally slows down:
+
+- Operating system scheduling issues, e.g. a process is waiting for a resource.
+- Stop the world garbage collection pauses, this means that the garbage collector pauses the program to clean up memory.
+- Page faults, this means that the program is waiting for data to be loaded from disk into memory.
+
+# Fault Tolerance
