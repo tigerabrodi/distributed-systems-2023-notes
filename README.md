@@ -182,3 +182,54 @@ We distinguish between physical time and logical time:
 - Logical clock: count number of events since some fixed point in the past.
 
 ## Quartz clocks
+
+- Quartz clocks: use a quartz crystal to keep time.
+- Quartz crystal is a piezoelectric material: it vibrates at a fixed frequency when an electric current is applied.
+- The nice thing about quartz clocks is that they are cheap and accurate.
+- How it works: the crystal vibrates at a fixed frequency. The frequency is divided down to 1Hz. The 1Hz signal is used to increment a counter. The counter is used to increment a counter for seconds, minutes, hours, etc.
+
+### Quartz clock drift
+
+- Quartz clocks are not perfect.
+- They drift: they run slightly faster or slower than the correct time.
+- Drift measured in parts per million (ppm).
+- 1ppm = 1 microsecond per second. = 86.4ms per day. = 31.6 seconds per year.
+- Most computers have a quartz clock that drifts by 50ppm.
+
+## Drift definition
+
+- Drift: the difference between the actual time and the time measured by the clock. In simple language: how much the clock is off or wrong.
+
+## Atomic clocks
+
+- Atomic clocks: use the oscillations of atoms to keep time. Oscillations of atoms are very stable, because they are not affected by temperature, pressure, etc.
+- Atomic clocks are very expensive, but very accurate.
+
+## GPS as time source
+
+- GPS satellites have atomic clocks.
+- GPS receivers use the time signal from the satellites to calculate their position.
+
+## Coordinated Universal Time (UTC)
+
+- UTC: the international standard for time.
+- Greenwich Mean Time (GMT): the time at the Greenwich meridian (0 degrees longitude).
+- International Atomic Time (TAI): the time measured by atomic clocks.
+- GMT is based on the rotation of the earth, and is not very accurate.
+- TAI is based on atomic clocks, and is very accurate. It's more accurate than the rotation of the earth, because the rotation of the earth is slowing down.
+- The compromise is UTC: UTC is based on TAI, but has leap seconds to keep it in sync with GMT. Leap seconds mean e.g. that 23:59:60 is a valid time.
+
+## Leap seconds
+
+- Leap seconds are added to UTC to keep it in sync with GMT.
+- Leap seconds are added at the end of June or December.
+- Leap seconds are announced 6 months in advance.
+
+## How computers represent time
+
+Two most common representations:
+
+- Unix time: number of seconds since 1970-01-01 00:00:00 UTC.
+- ISO 8601: 2018-09-23T10:00:00Z, ISO 8601 is a standard for representing dates and times.
+
+# Clock synchronization
