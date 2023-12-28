@@ -148,3 +148,37 @@ Service Level Objective (SLO): a target value or range of values for a service l
 - Failure: System as a whole isn't working.
 - Fault: Some part of the system isn't working. But the system as a whole is still working.
 - Single point of failure: a fault in a single component can cause the entire system to fail.
+
+## Failure detectors
+
+- Failure detector: a process that monitors the availability of a node.
+- Perfect failure detector: a failure detector that always detects a node that has crashed.
+
+Problem: cannot tell the difference between a node that has crashed and a node that is slow.
+
+## Failure detection in partially synchronous systems
+
+Perfect timeout based failure detector exists only in synchronous systems. It's because we know how long it takes for a message to be delivered. If we don't know how long it takes for a message to be delivered, we can't know if a node has crashed or is just slow.
+
+This leads to eventually perfect failure detector: a failure detector that eventually detects a node that has crashed:
+
+- May temporarily label a node as crashed, but will eventually correct itself.
+- May temporarily label a node as working, but will eventually correct itself.
+
+# Physical time
+
+## Clock and time in distributed systems
+
+Time is measured:
+
+- Schedulers, timeouts, failure detectors, etc.
+- Performance metrics, e.g. latency, throughput, etc.
+- Logging: record the time when an event happened.
+- Data with time limited validity, e.g. certificates, cookies, etc.
+
+We distinguish between physical time and logical time:
+
+- Physical clock: count number of seconds since some fixed point in the past.
+- Logical clock: count number of events since some fixed point in the past.
+
+## Quartz clocks
