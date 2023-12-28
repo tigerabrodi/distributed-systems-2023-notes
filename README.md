@@ -129,3 +129,22 @@ Nodes usually execute at a predictable speed, which occasionally slows down:
 - Page faults, this means that the program is waiting for data to be loaded from disk into memory.
 
 # Fault Tolerance
+
+## Availability
+
+- Availability: the proportion of time that a system is in a functioning condition.
+- Availability = uptime = fraction of time that the system is working.
+- "Two nines" availability: 99% availability = 3.65 days downtime per year.
+- "Three nines" availability: 99.9% availability = 8.76 hours downtime per year.
+- "Four nines" availability: 99.99% availability = 52.56 minutes downtime per year.
+- "Five nines" availability: 99.999% availability = 5.26 minutes downtime per year.
+
+**Service Level Agreement (SLA):** a contract between a service provider and a customer that specifies the availability of the service. This means that the service provider guarantees a certain availability.
+
+Service Level Objective (SLO): a target value or range of values for a service level that is measured by a service level indicator. This means that the service provider aims for a certain availability. For example, 99.9% of requests in a day get a response in 200ms.
+
+## Achieving high availability: fault tolerance
+
+- Failure: System as a whole isn't working.
+- Fault: Some part of the system isn't working. But the system as a whole is still working.
+- Single point of failure: a fault in a single component can cause the entire system to fail.
