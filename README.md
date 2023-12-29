@@ -233,3 +233,41 @@ Two most common representations:
 - ISO 8601: 2018-09-23T10:00:00Z, ISO 8601 is a standard for representing dates and times.
 
 # Clock synchronization
+
+- Computers track physical time using quartz clocks.
+- Due to clock drift, clocks on different computers will be out of sync. This means that the clocks will show different times.
+- Clock skew: the difference between the clocks on two computers.
+
+With clock sync, we want to minimize clock skew.
+
+Solution: Periodically get the time from a server that has a more accurate clock, e.g. atomic clock or GPS receiver.
+
+## Network Time Protocol (NTP)
+
+NTP is a protocol for synchronizing clocks on computers over a network.
+
+**How it works in short:** periodically ask a server for the time, and adjust the local clock to match the server's clock.
+
+Hierarchy of clock servers arranged in strata:
+
+- Stratum 0: atomic clocks, GPS receivers, etc.
+- Stratum 1: servers that get time from stratum 0 servers.
+- Stratum 2: servers that get time from stratum 1 servers.
+
+Strata means layers.
+
+**Estimating time over a network in short:** NTP client sends a request to the NTP server. The NTP server sends a response to the NTP client. The NTP client calculates the time it took for the request to be sent and the response to be received. The NTP client adjusts the local clock to match the server's clock.
+
+Once the client has estimated the clock skew, it needs to apply the skew gradually. This is called clock slewing, when the clock is adjusted gradually.
+
+## Precision Time Protocol (PTP)
+
+PTP is a protocol for synchronizing clocks on computers over a network.
+
+How it works in short: periodically ask a server for the time, and adjust the local clock to match the server's clock. PTP is more accurate than NTP, because it uses hardware timestamps.
+
+## Monotonic and time of day clocks
+
+- Time of day: Time since a fixed date e.g. 1970-01-01 00:00:00 UTC. May suddenly move forwards or backwards. Used when you care about the actual time of day.
+
+- Monotonic: Time since an arbitrary point in the past. Monotonic means that the time always increases. Good for measuring elapsed time on a single node. Used when you care about the duration of an event.
