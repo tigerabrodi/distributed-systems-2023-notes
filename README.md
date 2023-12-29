@@ -271,3 +271,25 @@ How it works in short: periodically ask a server for the time, and adjust the lo
 - Time of day: Time since a fixed date e.g. 1970-01-01 00:00:00 UTC. May suddenly move forwards or backwards. Used when you care about the actual time of day.
 
 - Monotonic: Time since an arbitrary point in the past. Monotonic means that the time always increases. Good for measuring elapsed time on a single node. Used when you care about the duration of an event.
+
+# Causality and happens-before
+
+In a distributed system, ordering of messages is not guaranteed. This means that we can not assume that messages are received in the same order that they are sent.
+
+Even if we use timestamps, timestamps may not be accurate. This means that we can not assume that messages are received in the same order that they are sent.
+
+## Happens before relation
+
+An event is something happening at one node. An event can be sending a message, receiving a message, or a local event.
+
+We say event a happens before event b if:
+
+- a and b are on the same node, and a is before b in the program order.
+- a is sending a message and b is receiving the same message.
+- a happens before b and b happens before c.
+
+However, it is possible that a and b are concurrent. This means that a and b are not ordered.
+
+## Causality
+
+Causality is a partial order. This means that some events are ordered, and some events are concurrent.
