@@ -293,3 +293,48 @@ However, it is possible that a and b are concurrent. This means that a and b are
 ## Causality
 
 Causality is a partial order. This means that some events are ordered, and some events are concurrent.
+
+# Logical time
+
+Timestamp may be inconsistent with the order of messages.
+
+Logical time is a way to assign a timestamp to an event. The key is they capture causality. The happens before relation.
+
+## Lamport clocks
+
+Every node has a counter initialized to 0. Every time an event happens, the counter is incremented. Every time a message is sent, the counter is sent with the message. Every time a message is received, the counter is updated to the maximum of the counter and the counter in the message + 1.
+
+To uniquely identify events, we can combine the counter with the node id. This means that we can have multiple events with the same counter.
+
+## Vector clocks
+
+The limitation of lamport clocks is that they can not tell the difference between two events that are concurrent. Because they only have one counter.
+
+- **Structure**: Each node in a distributed system maintains a vector (an array) of counters, one for each node in the system.
+- **Updating Counters**: When a node performs an action, it increments its own counter in the vector. When it sends a message, it includes its entire vector. Upon receiving a message, a node updates each element in its vector to be the maximum of the received vector and its own.
+
+- **Event Ordering**: Vector clocks provide a partial ordering of events as opposed to a total ordering provided by Lamport clocks. This means they can distinguish not only if one event causally affects another but also if events are independent and occurred in parallel.
+
+# Broadcast ordering
+
+Broadcast ordering in distributed systems refers to the methods used to ensure a consistent order of message delivery across all nodes when messages are broadcasted.
+
+This is crucial for maintaining data consistency and coordinated behavior in the system.
+
+1. **FIFO (First In, First Out) Order**:
+
+   - Messages from a single sender are delivered in the order they were sent.
+   - Ensures that if one node sends multiple messages, they won't be received out of sequence.
+
+2. **Causal Order**:
+
+   - Messages are delivered in a way that respects the causal relationships between them. Causal relationship refers to the idea that one message must be delivered before another if the first message causally influences the second.
+   - If one message causally influences another (e.g., a reply to a previous message), the second message is not delivered before the first.
+
+3. **Total Order (or Global Order)**:
+   - All nodes receive all messages in the same order.
+   - It’s the most stringent form of ordering, ensuring complete consistency across the system but often at the cost of higher overhead and reduced performance.
+
+Different distributed systems may require different types of broadcast ordering depending on their specific needs for consistency and performance.
+
+# Broadcast algorithms
