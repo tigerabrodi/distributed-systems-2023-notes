@@ -372,3 +372,17 @@ A node that stores a copy of the data is called a replica.
 5. **Synchronization**: It's important to keep all the copies updated and consistent. When data changes in one place, it needs to be updated in all the other places too.
 
 # Quorums
+
+A quorum is basically a minimum number of nodes that must agree or participate in an operation for it to be valid or completed.
+
+1. **Voting System**: Think of a quorum as a voting system where each node in a network gets a vote. For any decision or operation to be made, a certain number of votes (nodes) must participate.
+
+2. **Read and Write Operations**: In databases, for example, quorums are often used for read and write operations. A write operation might need to be confirmed by a majority of nodes before it's considered successful. A read operation might require data to be fetched from a majority of nodes to ensure it's the most recent version.
+
+3. **Fault Tolerance**: Quorums help in handling failures. Even if some nodes are down or unreachable, the system can continue to operate as long as the quorum condition (minimum number of responsive nodes) is met.
+
+4. **Balance between Availability and Consistency**: Using quorums, systems can balance between being always available (even if some data might be outdated) and ensuring data consistency (making sure all nodes have the most current data).
+
+The formula `R + W > N`: `R` is the number of nodes that must agree for a read operation, `W` is the number for a write operation, and `N` is the total number of nodes storing the data. This formula ensures that every write operation overlaps with every read operation, maintaining data consistency. It means the sum of nodes required for a read and write operation must exceed the total number of nodes to guarantee that they share at least one node in common.
+
+# State machine replication
