@@ -386,3 +386,27 @@ A quorum is basically a minimum number of nodes that must agree or participate i
 The formula `R + W > N`: `R` is the number of nodes that must agree for a read operation, `W` is the number for a write operation, and `N` is the total number of nodes storing the data. This formula ensures that every write operation overlaps with every read operation, maintaining data consistency. It means the sum of nodes required for a read and write operation must exceed the total number of nodes to guarantee that they share at least one node in common.
 
 # State machine replication
+
+State machine replication in distributed systems is a method used to ensure consistency across multiple computers or nodes.
+
+1. **Same Starting Point**: Imagine each node as a separate machine. They all start in the same state, like several players starting a board game from the same position.
+
+2. **Following the Same Steps**: Whenever a change or command comes in, it’s sent to all the machines, and they all follow the same steps in the same order. It's like all players following the same set of moves in a game.
+
+3. **Staying In Sync**: Since each machine follows the same steps in the same order, they all stay in sync with each other. If one machine looks at its state, it's the same as all the others.
+
+4. **Handling Failures**: If one machine fails or goes offline, the others can keep going, and when the failed machine comes back, it can catch up by following the missed steps.
+
+This way, state machine replication ensures that even though there are many machines, they all reflect the same information and changes, just like multiple mirrors showing the same image.
+
+# Total order broadcast
+
+Total order broadcast in distributed systems is a method to ensure that all messages are delivered to all nodes in exactly the same order. It's like making sure everyone in a group reads the pages of a book in the same sequence.
+
+1. **Consistent Order**: Every node in the system receives and processes broadcast messages in the same sequence.
+
+2. **Coordination**: Special algorithms are used to decide the order of messages, ensuring that this order is followed by all nodes.
+
+3. **Reliability**: It’s important for maintaining consistency in operations across the system, especially where the order of operations matters, like in database transactions.
+
+In summary, total order broadcast is like a rule that says, "No matter where you are in the network, you will see the events in the exact same order as everyone else."
